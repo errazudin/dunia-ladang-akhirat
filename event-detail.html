@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="event-detail-title">Event Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="index.html" style="color: white; text-decoration: none;">Wacana Ilmu Events</a></h1>
+        </div>
+    </header>
+
+    <main class="event-detail-page">
+        <div class="container">
+            <section class="event-hero">
+                <h2 class="event-title" id="detail-event-title"></h2>
+                <p class="event-subtitle" id="detail-event-subtitle"></p>
+                <div class="event-key-info">
+                    <p class="event-date">
+                        <span class="icon">🗓️</span>
+                        <time id="detail-event-date" datetime=""></time>
+                    </p>
+                    <p class="event-time">
+                        <span class="icon">⏰</span>
+                        <span id="detail-event-time"></span>
+                    </p>
+                    <p class="event-location">
+                        <span class="icon">📍</span>
+                        <span id="detail-event-location-name"></span>
+                        <br>
+                        <small id="detail-event-location-address"></small>
+                    </p>
+                </div>
+            </section>
+
+            <section class="event-description">
+                <h3>About the Event</h3>
+                <p id="detail-event-description"></p>
+                <img id="detail-event-poster" src="" alt="Event Poster" style="max-width: 100%; height: auto; margin-top: 20px; border-radius: 8px;">
+            </section>
+
+            <section class="event-speakers" id="detail-event-speakers-section">
+                <h3>Moderator & Panelists</h3>
+                <div class="speaker-list" id="detail-speaker-list">
+                    </div>
+            </section>
+
+            <section class="event-cta">
+                <button class="btn primary-btn" id="add-to-calendar-btn">Add to Calendar</button>
+                <button class="btn secondary-btn" id="share-event-btn">Share Event</button>
+            </section>
+
+            <section class="organizers-logos">
+                <h3>Organized By:</h3>
+                <div class="logo-group">
+                    <img src="images/tawfiq_logo.png" alt="Tawfiq Logo" class="org-logo">
+                    <img src="images/yayasan_al_azhar_logo.png" alt="Yayasan Al Azhar Logo" class="org-logo">
+                    <img src="images/surau_al_abrar_logo.png" alt="Surau Al-Abrar Logo" class="org-logo">
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 Wacana Ilmu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/events.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventId = urlParams.get('id');
+
+            if (eventId) {
+                const event = events.find(e => e.id === eventId);
+                if (event) {
+                    document.getElementById('event-detail-title').textContent = event.title;
+                    document.getElementById('detail-event-title').textContent = event.title;
+                    document.getElementById('detail-event-subtitle').textContent = event.subtitle;
+                    document.getElementById('detail-event-date').setAttribute('datetime', event.dateTimeISO);
+                    document.getElementById('detail-event-date').textContent = event.date;
+                    document.getElementById('detail-event-time').textContent = event.time;
+                    document.getElementById('detail-event-location-name').textContent = event.location.name;
+                    document.getElementById('detail-event-location-address').textContent = event.location.address;
+                    document.getElementById('detail-event-description').textContent = event.description;
+                    document.getElementById('detail-event-poster').src = event.poster;
+
+                    const speakerListDiv = document.getElementById('detail-speaker-list');
+                    if (event.speakers && event.speakers.length > 0) {
+                        speakerListDiv.innerHTML = ''; // Clear loading text
+                        event.speakers.forEach(speaker => {
+                            const speakerDiv = document.createElement('div');
+                            speakerDiv.classList.add('speaker-role');
+                            speakerDiv.innerHTML = `<h4>${speaker.role}</h4><p>${speaker.name}</p>`;
+                            speakerListDiv.appendChild(speakerDiv);
+                        });
+                    } else {
+                        document.getElementById('detail-event-speakers-section').style.display = 'none'; // Hide if no speakers
+                    }
+
+                    // Add to Calendar & Share functionality (same as previous draft)
+                    document.getElementById('add-to-calendar-btn').addEventListener('click', () => {
+                        alert('Functionality to add to calendar for ' + event.title + ' would go here!');
+                    });
+                    document.getElementById('share-event-btn').addEventListener('click', () => {
+                        if (navigator.share) {
+                            navigator.share({
+                                title: event.title,
+                                text: 'Check out this event: ' + event.title + ' on ' + event.date,
+                                url: window.location.href
+                            }).then(() => {
+                                console.log('Thanks for sharing!');
+                            }).catch(console.error);
+                        } else {
+                            alert('Web Share API is not supported. You can manually copy the link: ' + window.location.href);
+                        }
+                    });
+
+                } else {
+                    document.querySelector('.event-detail-page .container').innerHTML = '<h2>Event Not Found</h2><p>The event you are looking for does not exist.</p><p><a href="index.html">Back to Events List</a></p>';
+                }
+            } else {
+                document.querySelector('.event-detail-page .container').innerHTML = '<h2>No Event Selected</h2><p>Please select an event from the <a href="index.html">Events List</a>.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
