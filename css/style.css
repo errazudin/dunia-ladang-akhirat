@@ -1,12 +1,18 @@
-/* Basic Reset & Body Styles */
+/* Basic Reset & Body Styles - Web3 Refactor */
 :root {
-    --primary-color: #007bff; /* Example blue */
-    --text-color: #333;
-    --background-color: #f8f8f8;
-    --card-background: #ffffff;
-    --border-color: #eee;
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Roboto', sans-serif;
+    /* Web3-ish Color Palette */
+    --primary-color: #4CAF50;   /* A vibrant green, often seen in tech/blockchain */
+    --accent-color: #00bcd4;    /* A bright cyan for highlights */
+    --background-dark: #1a1a2e; /* Deep dark background */
+    --card-background: #1f4287; /* Slightly lighter dark for cards, with a blue tint */
+    --text-light: #e0e0e0;      /* Light grey for main text */
+    --text-faded: #a0a0a0;      /* Faded text for less important info */
+    --border-glow: #00bcd4;     /* Cyan glow for borders/accents */
+
+    /* Typography */
+    --font-heading: 'Roboto', sans-serif; /* Clean, modern sans-serif */
+    --font-body: 'Roboto', sans-serif; /* Same for body for consistency */
+    /* Consider adding a 'monospace' or techy font for specific elements if desired */
 }
 
 body {
@@ -14,9 +20,26 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    background-color: var(--background-dark);
+    color: var(--text-light); /* Light text on dark background */
+    overflow-x: hidden; /* Prevent horizontal scroll from subtle effects */
 }
+
+/* Subtle background pattern (optional, can be image or pure CSS) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(76, 175, 80, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at bottom right, rgba(0, 188, 212, 0.1) 0%, transparent 40%);
+    z-index: -1;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
 
 .container {
     max-width: 960px;
@@ -26,51 +49,70 @@ body {
 
 /* Header */
 .site-header {
-    background-color: var(--primary-color);
+    background-color: var(--card-background); /* Use card background for header */
     color: white;
-    padding: 20px 0;
+    padding: 25px 0;
     text-align: center;
+    border-bottom: 2px solid var(--primary-color); /* A solid, glowing line */
+    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.2); /* Subtle glow shadow */
 }
 
 .site-header h1 {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 2.5em;
+    font-size: 2.8em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-color); /* Main heading color */
 }
 
+.site-header p {
+    font-size: 1.1em;
+    color: var(--text-faded);
+    margin-top: 10px;
+}
+
+
 /* Main Content - Event Detail Page */
-.event-detail-page {
+.event-detail-page,
+.events-list-page {
     padding: 40px 0;
 }
 
-.event-hero {
+.event-hero,
+.event-description,
+.event-speakers,
+.event-cta,
+.organizers-logos {
     background-color: var(--card-background);
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    text-align: center;
+    border-radius: 12px; /* Slightly more rounded */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 188, 212, 0.2); /* Deeper shadow with glow */
     margin-bottom: 30px;
+    border: 1px solid rgba(76, 175, 80, 0.3); /* Subtle border matching primary */
 }
 
 .event-title {
     font-family: var(--font-heading);
-    font-size: 3em;
-    color: var(--primary-color);
+    font-size: 3.2em;
+    color: var(--accent-color); /* Bright accent for main title */
     margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(0, 188, 212, 0.5); /* Text glow */
 }
 
 .event-subtitle {
-    font-size: 1.2em;
-    color: #666;
-    margin-bottom: 25px;
+    font-size: 1.3em;
+    color: var(--text-faded);
+    margin-bottom: 30px;
 }
 
 .event-key-info {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 40px; /* More space */
     flex-wrap: wrap;
-    font-size: 1.1em;
+    font-size: 1.2em;
+    color: var(--text-light);
 }
 
 .event-key-info p {
@@ -80,79 +122,104 @@ body {
 }
 
 .event-key-info .icon {
-    font-size: 1.5em;
-    margin-right: 8px;
-}
-
-.event-description,
-.event-speakers,
-.event-cta,
-.organizers-logos {
-    background-color: var(--card-background);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-    margin-bottom: 25px;
+    font-size: 1.8em; /* Larger icons */
+    margin-right: 10px;
+    color: var(--primary-color); /* Icons match primary color */
+    filter: drop-shadow(0 0 5px rgba(76, 175, 80, 0.5)); /* Subtle icon glow */
 }
 
 h2 {
     font-family: var(--font-heading);
-    color: var(--primary-color);
-    margin-bottom: 25px;
+    color: var(--accent-color);
+    margin-bottom: 35px;
     text-align: center;
+    font-size: 2.5em;
+    text-shadow: 0 0 8px rgba(0, 188, 212, 0.4);
+    letter-spacing: 1px;
 }
 
 h3 {
     font-family: var(--font-heading);
     color: var(--primary-color);
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(76, 175, 80, 0.5); /* Lighter border */
+    padding-bottom: 12px;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
 .speaker-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider cards */
+    gap: 25px;
+}
+
+.speaker-role {
+    background-color: rgba(0, 0, 0, 0.2); /* Darker background for speaker roles */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 188, 212, 0.3); /* Cyan border */
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.speaker-role:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
 }
 
 .speaker-role h4 {
-    margin-bottom: 5px;
-    color: #555;
+    margin-bottom: 8px;
+    color: var(--accent-color);
+    font-size: 1.3em;
 }
+.speaker-role p {
+    color: var(--text-light);
+    font-size: 1.1em;
+}
+
 
 /* Buttons */
 .btn {
     display: inline-block;
-    padding: 12px 25px;
+    padding: 14px 30px; /* Larger buttons */
     border: none;
-    border-radius: 5px;
+    border-radius: 8px; /* Slightly more rounded */
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: bold;
     text-decoration: none;
-    transition: background-color 0.3s ease;
-    margin-right: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-right: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .primary-btn {
     background-color: var(--primary-color);
     color: white;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.4); /* Glow effect */
 }
 
 .primary-btn:hover {
-    background-color: #0056b3;
+    background-color: #388e3c; /* Darker green */
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
 }
 
 .secondary-btn {
-    background-color: #6c757d;
+    background-color: #3f51b5; /* A deep blue for secondary action */
     color: white;
+    box-shadow: 0 0 15px rgba(63, 81, 181, 0.4);
 }
 
 .secondary-btn:hover {
-    background-color: #5a6268;
+    background-color: #303f9f;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(63, 81, 181, 0.6);
 }
+
 
 /* Organizers Logos */
 .organizers-logos {
@@ -163,104 +230,148 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .org-logo {
-    max-height: 80px; /* Adjust as needed */
+    max-height: 90px; /* Slightly larger logos */
     width: auto;
+    filter: drop-shadow(0 0 8px rgba(0, 188, 212, 0.3)); /* Subtle glow on logos */
+    transition: transform 0.2s ease;
+}
+
+.org-logo:hover {
+    transform: scale(1.05);
 }
 
 /* Footer */
 .site-footer {
-    background-color: #333;
-    color: white;
+    background-color: #111; /* Even darker footer */
+    color: var(--text-faded);
     text-align: center;
-    padding: 20px 0;
-    font-size: 0.9em;
+    padding: 25px 0;
+    font-size: 0.95em;
+    border-top: 1px solid rgba(76, 175, 80, 0.3);
 }
 
 /* Event Cards Grid for index.html */
 .event-cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-    margin-bottom: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly larger card min-width */
+    gap: 35px; /* More space between cards */
+    margin-top: 35px;
+    margin-bottom: 55px;
 }
 
 .event-card {
     background-color: var(--card-background);
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 188, 212, 0.2);
+    padding: 30px; /* More padding */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    text-decoration: none; /* For links */
-    color: var(--text-color);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease;
+    text-decoration: none;
+    color: var(--text-light);
+    border: 1px solid rgba(76, 175, 80, 0.3); /* Subtle border */
+    position: relative; /* For subtle background patterns */
+    overflow: hidden;
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.05) 0%, transparent 70%);
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.event-card:hover::before {
+    opacity: 1;
 }
 
 .event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 0 20px rgba(0, 188, 212, 0.4);
+    border-color: var(--accent-color); /* Highlight border on hover */
 }
 
 .event-card h4 {
     font-family: var(--font-heading);
     color: var(--primary-color);
-    font-size: 1.6em;
+    font-size: 1.8em; /* Larger heading */
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
 }
 
 .event-card p {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
+    color: var(--text-faded); /* Faded text for card details */
+    font-size: 1.05em;
 }
 
 .event-card .icon {
-    margin-right: 8px;
-    font-size: 1.2em;
+    margin-right: 10px;
+    font-size: 1.4em; /* Larger icons in cards */
+    color: var(--accent-color); /* Icons match accent color */
 }
 
 .event-card .card-link {
     display: inline-block;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
+    background-color: var(--accent-color);
+    color: var(--background-dark); /* Dark text on bright button */
+    padding: 10px 20px;
+    border-radius: 6px;
     text-decoration: none;
-    align-self: flex-end; /* Pushes button to bottom right */
-    margin-top: 15px;
-    transition: background-color 0.2s ease;
+    align-self: flex-start; /* Aligned to left for modern feel */
+    margin-top: 20px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.4);
 }
 
 .event-card .card-link:hover {
-    background-color: #0056b3;
+    background-color: #008c9e; /* Darker cyan */
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.6);
 }
 
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .event-hero {
-        padding: 20px;
+        padding: 25px;
     }
     .event-title {
-        font-size: 2.2em;
+        font-size: 2.5em;
     }
     .event-key-info {
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
     }
     .btn {
         display: block;
-        width: calc(100% - 30px); /* Account for padding */
+        width: calc(100% - 40px); /* Account for padding */
         margin-bottom: 15px;
         margin-right: 0;
+    }
+    h2 {
+        font-size: 2em;
+    }
+    h3 {
+        font-size: 1.5em;
     }
 }
 
@@ -268,13 +379,23 @@ h3 {
     .container {
         padding: 15px;
     }
+    .site-header h1 {
+        font-size: 2em;
+    }
     .event-title {
-        font-size: 1.8em;
+        font-size: 2em;
     }
     .event-subtitle {
+        font-size: 1.1em;
+    }
+    .event-key-info {
         font-size: 1em;
     }
     .event-cards-grid {
-        grid-template-columns: 1fr; /* Stack cards on very small screens */
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .event-card {
+        padding: 20px;
     }
 }
