@@ -41,6 +41,22 @@ const events = [
         ],
         poster: "images/telegram-cloud-photo-size-5-6257766556159297476-y.jpg",
         isPastEvent: false // This will be updated by the script below
+    },
+        {
+        id: "al-imam-al-muhajir", // Unique ID for the new event
+        title: "Majlis Memperingati Tokoh Al-Imam Al-Muhajir Ahmad Bin 'Isa",
+        subtitle: "Bersama Habaib, Masyaikh, Asatizah & Jemaah", // Reusing a common subtitle if no specific one is given
+        description: "Muslimin & muslimat dijemput hadir.", // Default description if not specified
+        date: "29 Jun 2025",
+        dateTimeISO: "2025-06-29T18:30:00+08:00", // 6.30 petang
+        time: "6.30 petang, Ahad",
+        location: {
+            name: "Masjid Ibnu Mas'ud",
+            address: "Jalan Damai, KL"
+        },
+        speakers: [], // No specific speakers listed on this poster
+        poster: "images/telegram-cloud-photo-size-5-6239975238251170006-y.jpg",
+        isPastEvent: false // This will be updated by the script below
     }
 ];
 
