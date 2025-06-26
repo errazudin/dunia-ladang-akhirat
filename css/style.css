@@ -1,223 +1,310 @@
-/* Basic Reset & Body Styles - Web3 Refactor */
+/* Basic Reset & Body Styles - Creative Web3 Refactor */
 :root {
-    /* Web3-ish Color Palette */
-    --primary-color: #4CAF50;   /* A vibrant green, often seen in tech/blockchain */
-    --accent-color: #00bcd4;    /* A bright cyan for highlights */
-    --background-dark: #1a1a2e; /* Deep dark background */
-    --card-background: #1f4287; /* Slightly lighter dark for cards, with a blue tint */
-    --text-light: #e0e0e0;      /* Light grey for main text */
-    --text-faded: #a0a0a0;      /* Faded text for less important info */
-    --border-glow: #00bcd4;     /* Cyan glow for borders/accents */
+    /* Bold & Energetic Color Palette */
+    --primary-color: #00F0FF; /* Bright Cyan - for main accents, headings */
+    --secondary-color: #FF00E0; /* Vibrant Magenta - for secondary accents, buttons */
+    --background-dark: #0A0A1F; /* Very deep blue/purple dark background */
+    --card-background: #15153A; /* Slightly lighter deep blue for cards */
+    --text-light: #E0F0FF;     /* Off-white/light blue for main text */
+    --text-faded: #8A9BBF;     /* Muted blue for less important info */
+    --border-highlight: #00F0FF; /* Primary color for borders/glows */
+    --gradient-start: #1A0A3A; /* Dark purple for gradient */
+    --gradient-end: #0A0A1F;   /* Even darker blue for gradient */
 
     /* Typography */
-    --font-heading: 'Roboto', sans-serif; /* Clean, modern sans-serif */
-    --font-body: 'Roboto', sans-serif; /* Same for body for consistency */
-    /* Consider adding a 'monospace' or techy font for specific elements if desired */
+    --font-heading: 'Oxanium', sans-serif; /* Futuristic, geometric sans-serif */
+    --font-body: 'Inter', sans-serif;     /* Clean, modern, highly readable */
+
+    /* Import Google Fonts - You'll need to add these to your HTML <head> */
+    /* <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet"> */
 }
+
+/* Ensure these fonts are linked in your index.html and event-detail.html <head> */
+/* Add this line to your <head> section of both HTML files: */
+/* <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet"> */
+
 
 body {
     font-family: var(--font-body);
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: var(--background-dark);
-    color: var(--text-light); /* Light text on dark background */
-    overflow-x: hidden; /* Prevent horizontal scroll from subtle effects */
+    background: radial-gradient(at top left, var(--gradient-start), var(--gradient-end));
+    background-size: 200% 200%; /* Make gradient larger than viewport */
+    animation: gradientShift 10s ease infinite alternate; /* Subtle animated background */
+    color: var(--text-light);
+    overflow-x: hidden;
+    min-height: 100vh; /* Ensure body takes full height for gradient */
+    display: flex;
+    flex-direction: column;
 }
 
-/* Subtle background pattern (optional, can be image or pure CSS) */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at top left, rgba(76, 175, 80, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at bottom right, rgba(0, 188, 212, 0.1) 0%, transparent 40%);
-    z-index: -1;
-    opacity: 0.7;
-    pointer-events: none;
+@keyframes gradientShift {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
-
 
 .container {
-    max-width: 960px;
+    max-width: 1000px; /* Slightly wider container */
     margin: 0 auto;
-    padding: 20px;
+    padding: 25px;
 }
 
 /* Header */
 .site-header {
-    background-color: var(--card-background); /* Use card background for header */
-    color: white;
-    padding: 25px 0;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(255, 0, 224, 0.1));
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-bottom: 2px solid var(--border-highlight);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(255, 0, 224, 0.2); /* Dual glow */
+    padding: 30px 0;
     text-align: center;
-    border-bottom: 2px solid var(--primary-color); /* A solid, glowing line */
-    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.2); /* Subtle glow shadow */
+    position: relative;
+    z-index: 10;
 }
 
 .site-header h1 {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 2.8em;
+    font-size: 3.5em; /* Larger, bolder */
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--primary-color); /* Main heading color */
+    letter-spacing: 3px;
+    color: var(--primary-color);
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 40px rgba(0, 240, 255, 0.6); /* Stronger glow */
 }
 
 .site-header p {
-    font-size: 1.1em;
+    font-size: 1.2em;
     color: var(--text-faded);
-    margin-top: 10px;
+    margin-top: 15px;
+    letter-spacing: 1px;
 }
 
-
-/* Main Content - Event Detail Page */
-.event-detail-page,
-.events-list-page {
-    padding: 40px 0;
+/* Main Content Wrapper */
+main {
+    flex: 1; /* Allows main content to grow and push footer down */
+    padding: 50px 0;
 }
 
+/* Common Section Styles */
 .event-hero,
 .event-description,
 .event-speakers,
 .event-cta,
 .organizers-logos {
     background-color: var(--card-background);
-    padding: 30px;
-    border-radius: 12px; /* Slightly more rounded */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 188, 212, 0.2); /* Deeper shadow with glow */
-    margin-bottom: 30px;
-    border: 1px solid rgba(76, 175, 80, 0.3); /* Subtle border matching primary */
+    padding: 40px; /* More generous padding */
+    border-radius: 16px; /* Even more rounded, softer edge */
+    border: 1px solid rgba(0, 240, 255, 0.3); /* Subtle primary color border */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 25px rgba(255, 0, 224, 0.3); /* Deeper, dual-color glow */
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Subtle background overlay for sections (optional, for added depth) */
+.event-hero::before,
+.event-description::before,
+.event-speakers::before,
+.event-cta::before,
+.organizers-logos::before,
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 240, 255, 0.03), transparent, rgba(255, 0, 224, 0.03));
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+
+/* Event Detail Specifics */
 .event-title {
     font-family: var(--font-heading);
-    font-size: 3.2em;
-    color: var(--accent-color); /* Bright accent for main title */
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(0, 188, 212, 0.5); /* Text glow */
+    font-size: 3.8em; /* Massive title */
+    color: var(--primary-color);
+    text-shadow: 0 0 25px rgba(0, 240, 255, 0.9), 0 0 50px rgba(0, 240, 255, 0.7);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
 }
 
 .event-subtitle {
-    font-size: 1.3em;
+    font-family: var(--font-body);
+    font-size: 1.4em;
     color: var(--text-faded);
-    margin-bottom: 30px;
+    margin-bottom: 35px;
+    font-weight: 300;
 }
 
 .event-key-info {
     display: flex;
     justify-content: center;
-    gap: 40px; /* More space */
+    gap: 50px;
     flex-wrap: wrap;
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: var(--text-light);
+    font-weight: 700;
 }
 
 .event-key-info p {
     margin: 0;
     display: flex;
     align-items: center;
+    position: relative; /* For the "glitch" effect on hover */
+    overflow: hidden;
+    padding: 5px 0;
 }
 
+.event-key-info p:hover {
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px var(--secondary-color);
+}
+
+.event-key-info p::before { /* Glitch effect line */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.3s ease-out;
+}
+.event-key-info p:hover::before {
+    width: 100%;
+}
+
+
 .event-key-info .icon {
-    font-size: 1.8em; /* Larger icons */
-    margin-right: 10px;
-    color: var(--primary-color); /* Icons match primary color */
-    filter: drop-shadow(0 0 5px rgba(76, 175, 80, 0.5)); /* Subtle icon glow */
+    font-size: 2em;
+    margin-right: 12px;
+    color: var(--primary-color);
+    filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.7));
 }
 
 h2 {
     font-family: var(--font-heading);
-    color: var(--accent-color);
-    margin-bottom: 35px;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
     text-align: center;
-    font-size: 2.5em;
-    text-shadow: 0 0 8px rgba(0, 188, 212, 0.4);
-    letter-spacing: 1px;
+    font-size: 3em;
+    text-shadow: 0 0 20px rgba(255, 0, 224, 0.8);
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 h3 {
     font-family: var(--font-heading);
     color: var(--primary-color);
-    border-bottom: 1px solid rgba(76, 175, 80, 0.5); /* Lighter border */
-    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.4);
+    padding-bottom: 15px;
     margin-top: 0;
-    margin-bottom: 25px;
-    font-size: 1.8em;
-    text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+    margin-bottom: 30px;
+    font-size: 2em;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    letter-spacing: 1px;
 }
 
 .speaker-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider cards */
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
 .speaker-role {
-    background-color: rgba(0, 0, 0, 0.2); /* Darker background for speaker roles */
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 188, 212, 0.3); /* Cyan border */
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: rgba(0, 0, 0, 0.3); /* Darker, slightly transparent */
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 0, 224, 0.3);
+    box-shadow: 0 0 15px rgba(255, 0, 224, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .speaker-role:hover {
-    transform: translateY(-3px);
-    border-color: var(--accent-color);
-    box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+    transform: translateY(-5px) scale(1.01);
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 20px rgba(255, 0, 224, 0.6), 0 0 30px rgba(255, 0, 224, 0.4);
 }
 
 .speaker-role h4 {
-    margin-bottom: 8px;
-    color: var(--accent-color);
-    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: var(--primary-color); /* Primary color for speaker roles */
+    font-size: 1.5em;
+    text-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
 }
 .speaker-role p {
     color: var(--text-light);
-    font-size: 1.1em;
+    font-size: 1.15em;
+    font-weight: 300;
 }
 
 
 /* Buttons */
 .btn {
     display: inline-block;
-    padding: 14px 30px; /* Larger buttons */
+    padding: 16px 35px;
     border: none;
-    border-radius: 8px; /* Slightly more rounded */
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 1.1em;
+    font-family: var(--font-heading); /* Button text uses heading font */
+    font-size: 1.2em;
     font-weight: bold;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    margin-right: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    margin-right: 25px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before { /* For glowing border effect */
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    z-index: -1;
+    border-radius: 12px;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn:hover::before {
+    opacity: 1;
 }
 
 .primary-btn {
     background-color: var(--primary-color);
-    color: white;
-    box-shadow: 0 0 15px rgba(76, 175, 80, 0.4); /* Glow effect */
+    color: var(--background-dark); /* Dark text on bright button */
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
 }
 
 .primary-btn:hover {
-    background-color: #388e3c; /* Darker green */
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+    background-color: transparent; /* Transparent on hover to show glow */
+    color: var(--primary-color); /* Text matches glow */
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
 }
 
 .secondary-btn {
-    background-color: #3f51b5; /* A deep blue for secondary action */
-    color: white;
-    box-shadow: 0 0 15px rgba(63, 81, 181, 0.4);
+    background-color: var(--secondary-color);
+    color: var(--background-dark);
+    box-shadow: 0 0 20px rgba(255, 0, 224, 0.6);
 }
 
 .secondary-btn:hover {
-    background-color: #303f9f;
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(63, 81, 181, 0.6);
+    background-color: transparent;
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(255, 0, 224, 0.8);
 }
 
 
@@ -230,55 +317,58 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 50px;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .org-logo {
-    max-height: 90px; /* Slightly larger logos */
+    max-height: 100px; /* Even larger logos */
     width: auto;
-    filter: drop-shadow(0 0 8px rgba(0, 188, 212, 0.3)); /* Subtle glow on logos */
-    transition: transform 0.2s ease;
+    filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.5)); /* Stronger glow */
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .org-logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.9));
 }
 
 /* Footer */
 .site-footer {
-    background-color: #111; /* Even darker footer */
+    background-color: rgba(0,0,0,0.3); /* Slightly transparent */
     color: var(--text-faded);
     text-align: center;
-    padding: 25px 0;
-    font-size: 0.95em;
-    border-top: 1px solid rgba(76, 175, 80, 0.3);
+    padding: 30px 0;
+    font-size: 0.9em;
+    border-top: 1px solid rgba(255, 0, 224, 0.2);
+    margin-top: auto; /* Pushes footer to bottom */
 }
 
 /* Event Cards Grid for index.html */
 .event-cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly larger card min-width */
-    gap: 35px; /* More space between cards */
-    margin-top: 35px;
-    margin-bottom: 55px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Larger card min-width */
+    gap: 40px;
+    margin-top: 40px;
+    margin-bottom: 60px;
 }
 
 .event-card {
     background-color: var(--card-background);
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3), 0 0 15px rgba(0, 188, 212, 0.2);
-    padding: 30px; /* More padding */
+    border-radius: 16px;
+    border: 1px solid rgba(255, 0, 224, 0.3); /* Magenta border */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 25px rgba(0, 240, 255, 0.3); /* Dual glow for cards */
+    padding: 35px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease;
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, border-color 0.4s ease;
     text-decoration: none;
     color: var(--text-light);
-    border: 1px solid rgba(76, 175, 80, 0.3); /* Subtle border */
-    position: relative; /* For subtle background patterns */
+    position: relative;
     overflow: hidden;
+    z-index: 1; /* For subtle background patterns */
 }
 
 .event-card::before {
@@ -288,11 +378,12 @@ h3 {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(76, 175, 80, 0.05) 0%, transparent 70%);
-    transform: rotate(45deg);
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.07) 0%, transparent 70%);
+    transform: rotate(60deg);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.5s ease;
     pointer-events: none;
+    z-index: -1;
 }
 
 .event-card:hover::before {
@@ -300,102 +391,142 @@ h3 {
 }
 
 .event-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 0 20px rgba(0, 188, 212, 0.4);
-    border-color: var(--accent-color); /* Highlight border on hover */
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 35px rgba(255, 0, 224, 0.6);
+    border-color: var(--primary-color); /* Highlight border on hover with primary color */
 }
 
 .event-card h4 {
     font-family: var(--font-heading);
     color: var(--primary-color);
-    font-size: 1.8em; /* Larger heading */
+    font-size: 2em;
     margin-top: 0;
-    margin-bottom: 12px;
-    text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    letter-spacing: 0.5px;
 }
 
 .event-card p {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    color: var(--text-faded); /* Faded text for card details */
-    font-size: 1.05em;
+    color: var(--text-faded);
+    font-size: 1.1em;
+    font-weight: 300;
 }
 
 .event-card .icon {
-    margin-right: 10px;
-    font-size: 1.4em; /* Larger icons in cards */
-    color: var(--accent-color); /* Icons match accent color */
+    margin-right: 12px;
+    font-size: 1.6em;
+    color: var(--secondary-color); /* Icons in cards use secondary color */
 }
 
 .event-card .card-link {
     display: inline-block;
-    background-color: var(--accent-color);
-    color: var(--background-dark); /* Dark text on bright button */
-    padding: 10px 20px;
-    border-radius: 6px;
+    background-color: var(--secondary-color);
+    color: var(--background-dark);
+    padding: 12px 25px;
+    border-radius: 8px;
     text-decoration: none;
-    align-self: flex-start; /* Aligned to left for modern feel */
-    margin-top: 20px;
+    align-self: flex-start;
+    margin-top: 25px;
     font-weight: bold;
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 0 10px rgba(0, 188, 212, 0.4);
+    font-family: var(--font-body);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 0, 224, 0.5);
 }
 
 .event-card .card-link:hover {
-    background-color: #008c9e; /* Darker cyan */
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(0, 188, 212, 0.6);
+    background-color: transparent;
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(255, 0, 224, 0.8);
 }
 
 
 /* Responsive adjustments */
+@media (max-width: 992px) {
+    .container {
+        max-width: 90%;
+    }
+    .event-hero, .event-description, .event-speakers, .event-cta, .organizers-logos {
+        padding: 30px;
+    }
+    .event-title {
+        font-size: 3em;
+    }
+    h2 {
+        font-size: 2.5em;
+    }
+    h3 {
+        font-size: 1.8em;
+    }
+    .event-cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+}
+
 @media (max-width: 768px) {
-    .event-hero {
-        padding: 25px;
+    .site-header h1 {
+        font-size: 2.8em;
     }
     .event-title {
         font-size: 2.5em;
     }
+    .event-subtitle {
+        font-size: 1.2em;
+    }
     .event-key-info {
         flex-direction: column;
-        gap: 20px;
+        gap: 25px;
+        font-size: 1.2em;
     }
     .btn {
         display: block;
-        width: calc(100% - 40px); /* Account for padding */
-        margin-bottom: 15px;
+        width: calc(100% - 50px);
+        margin-bottom: 20px;
         margin-right: 0;
     }
     h2 {
         font-size: 2em;
     }
     h3 {
-        font-size: 1.5em;
+        font-size: 1.6em;
+    }
+    .speaker-list {
+        grid-template-columns: 1fr;
+    }
+    .event-card {
+        padding: 25px;
     }
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 15px;
-    }
     .site-header h1 {
-        font-size: 2em;
+        font-size: 2.2em;
+        letter-spacing: 1.5px;
     }
     .event-title {
         font-size: 2em;
+        text-shadow: 0 0 15px rgba(0, 240, 255, 0.9);
     }
     .event-subtitle {
-        font-size: 1.1em;
+        font-size: 1em;
     }
     .event-key-info {
         font-size: 1em;
     }
+    h2 {
+        font-size: 1.8em;
+    }
+    h3 {
+        font-size: 1.4em;
+    }
     .event-cards-grid {
         grid-template-columns: 1fr;
-        gap: 25px;
     }
-    .event-card {
-        padding: 20px;
+    .org-logo {
+        max-height: 80px;
     }
 }
